@@ -4,10 +4,12 @@
         <meta charset="UTF-8">
         <title>MIRO SECURITY MODEL</title>
     </head>
-    <body>
+    <body bgcolor="#aa5509">
         <form method="post" enctype="multipart/form-data">
             <input type="file" name="security"/>
             <p>ЗАДАЙ ЗАГЛАВИЕ:<input type="text" name="title"/></p>
+            <p>ЗАДАЙ ВЪПРОС:<input type="text" name="question"/></p>
+            <p>ЗАДАЙ ОТГОВОР:<input type="text" name="answer"/></p>
             <input type="submit"/>
 
         </form>
@@ -16,12 +18,23 @@
         define('DATA_DIR', __DIR__ . '/pictures/');
 //        var_dump(__DIR__);
 
-
-        if (isset($_POST)) {
-//            echo "<pre>";
-//            var_dump($_FILES);
-//            echo"</pre>";
-            $title=$_POST['title'];
+if(isset($_POST['title'])){
+    $title=$_POST['title'];
+}else{
+    echo "no titile";
+}
+if(isset($_POST['question'])){
+    $question=$_POST['question'];
+}else{
+    echo "n question"; 
+}
+if(isset($_POST['answer'])){
+    $answer=$_POST['answer'];
+}else{
+    
+}
+        if (!empty($_POST)) {
+            
             $tmpName = $_FILES['security']['tmp_name'];
             $name = $_FILES['security']['name'];
             $unique = uniqid();
@@ -30,21 +43,19 @@
             $avatarPath = DATA_DIR . $avatarName; // създваме пътя където ще стои нашия файл
             if (move_uploaded_file($tmpName, $avatarPath)) {
                 $img = "pictures/$avatarName";
-
-//            var_dump($img);
-//            echo "<br/>";
-//            var_dump("pictures/5f60bdc460a0c_Screenshot (15).png");
-                ?>
+   ?>
                 <img src="<?php echo $img ?>" width="366" height="180" alt="no pics"/>
 
                 <?php
             }
         }
 
-        $query = "INSERT INTO `pictures` ( `pics`,`title`) VALUES (:pics,:title)";
+        $query = "INSERT INTO `pictures` ( `pics`,`title`,`question`,answer) VALUES (:pics,:title,:question,:answer)";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(":pics", $img);
         $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":question", $question);
+        $stmt->bindParam(":answer", $answer);
         $stmt->execute();
 
 ?>
