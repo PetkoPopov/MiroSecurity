@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,18 +6,19 @@
     </head>
     <body bgcolor="#aa5509">
         <form method="post" enctype="multipart/form-data">
-            <input type="file" name="security"/>
+            <div>
+                <input type="file" name="security" style="background-color: aquamarine"/>
             <p>ЗАДАЙ ЗАГЛАВИЕ:<input type="text" name="title"/></p>
             <p>ЗАДАЙ ВЪПРОС:<input type="text" name="question"/></p>
-            <p>ЗАДАЙ ОТГОВОР:<input type="text" name="answer"/></p>
-            <input type="submit"/>
-
+            <p>ЗАДАЙ ОТГОВОР:
+                <input type="text" name="answer"/></p>
+            <input type="submit" value="ДОБАВИ" style="width: 144px;background-color: cyan"/>
+            </div>
         </form>
         <?php
         require_once './PDOconnection/PDOConnection.php';
         define('DATA_DIR', __DIR__ . '/pictures/');
 //        var_dump(__DIR__);
-
 if(isset($_POST['title'])){
     $title=$_POST['title'];
 }else{
@@ -59,6 +60,12 @@ if(isset($_POST['answer'])){
         $stmt->execute();
 
 ?>
+                <div>
                 <a href="select/selectImage.php">GO TO SELECT IMAGE</a>
-    </body>
+                <p></p>
+             
+                   <a href="select/randomImage.php">GO TO RANDOM IMAGE</a>
+                   <p>   <a href="select/allImages.php">GO TO VIEW ALL IMAGE</a></p>
+                </div>
+                </body>
 </html>
