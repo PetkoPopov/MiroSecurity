@@ -32,7 +32,7 @@ if(isset($_POST['question'])){
 if(isset($_POST['answer'])){
     $answer=$_POST['answer'];
 }else{
-    
+     
 }
         if (!empty($_POST)) {
             
