@@ -49,7 +49,7 @@ if(isset($_POST['answer'])){
 
                 <?php
             }
-        }
+        
 
         $query = "INSERT INTO `pictures` ( `pics`,`title`,`question`,answer) VALUES (:pics,:title,:question,:answer)";
         $stmt = $pdo->prepare($query);
@@ -58,7 +58,7 @@ if(isset($_POST['answer'])){
         $stmt->bindParam(":question", $question);
         $stmt->bindParam(":answer", $answer);
         $stmt->execute();
-
+        }
 ?>
                 <div>
                 <a href="select/selectImage.php">GO TO SELECT IMAGE</a>
